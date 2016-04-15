@@ -1,12 +1,12 @@
 # GamePadRC
-Remote control Lego Mindstorms Ev3 bot with A PS3 sixaxis dualoshock 3 gamepad
+Remote control Lego Mindstorms Ev3 robot with A PS3 sixaxis dualoshock 3 gamepad
 
 # Requirements
 LEGO Ev3 brick with ev3dev (http://www.ev3dev.org/)
 
 # Installation
 ```
-git clone https://github.com/Downquark7/OmnibotGamePadRC.git
-sudo chmod +x OmnibotGamePadRC/run_bot.py
+git clone https://github.com/Downquark7/GamePadRC.git
+sudo chmod +x GamePadRC/run_bot.py
 ```
 

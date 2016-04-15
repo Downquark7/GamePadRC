@@ -9,7 +9,7 @@ LEGO Ev3 brick with ev3dev (http://www.ev3dev.org/)
 
 # Installation
 ```
-git clone https://github.com/antonvh/OmnibotGamePadRC.git
+git clone https://github.com/Downquark7/OmnibotGamePadRC.git
 sudo chmod +x OmnibotGamePadRC/run_omnibot.py
 ```
 

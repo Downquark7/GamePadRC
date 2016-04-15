@@ -49,14 +49,13 @@ gamepad = evdev.InputDevice(ps3dev)
 
 
 side_speed = 0
-turn_speed = 0
 fwd_speed = 0
 running = True
 
 class MotorThread(threading.Thread):
     def __init__(self):
-        self.left1_motor = ev3.LargeMotor(ev3.OUTPUT_A)
-        self.left2_motor = ev3.LargeMotor(ev3.OUTPUT_B)
+        self.left2_motor = ev3.LargeMotor(ev3.OUTPUT_A)
+        self.left1_motor = ev3.LargeMotor(ev3.OUTPUT_B)
         self.right1_motor = ev3.LargeMotor(ev3.OUTPUT_C)
         self.right2_motor = ev3.LargeMotor(ev3.OUTPUT_D)
         threading.Thread.__init__(self)
@@ -85,9 +84,13 @@ if __name__ == "__main__":
             
             if event.code == 1: #Y axis on left stick
                 fwd_speed = scalestick(event.value)
+                if abs(fwd_speed) < 10:
+                    fwd_speed = 0
 
             if event.code == 2: #X axis on right stick
                 turn_speed = -scalestick(event.value)
+                if abs(turn_speed) < 10:
+                    turn_speed = 0
 
         if event.type == 1 and event.code == 302 and event.value == 1:
             print "X button is pressed. Break."

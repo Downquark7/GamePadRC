@@ -53,19 +53,19 @@ running = True
 
 class MotorThread(threading.Thread):
     def __init__(self):
-        self.front_motor = ev3.LargeMotor(ev3.OUTPUT_A)
-        self.right_motor = ev3.LargeMotor(ev3.OUTPUT_B)
-        self.back_motor = ev3.LargeMotor(ev3.OUTPUT_C)
-        self.left_motor = ev3.LargeMotor(ev3.OUTPUT_D)
+        self.left1_motor = ev3.LargeMotor(ev3.OUTPUT_A)
+        self.left2_motor = ev3.LargeMotor(ev3.OUTPUT_B)
+        self.right1_motor = ev3.LargeMotor(ev3.OUTPUT_C)
+        self.right2_motor = ev3.LargeMotor(ev3.OUTPUT_D)
         threading.Thread.__init__(self)
 
     def run(self):
         print "Engines running!"
         while running:
-            self.front_motor.run_forever(duty_cycle_sp = dc_clamp(-side_speed+turn_speed))
-            self.back_motor.run_forever(duty_cycle_sp = dc_clamp(side_speed+turn_speed))
-            self.left_motor.run_forever(duty_cycle_sp = dc_clamp(fwd_speed+turn_speed))
-            self.right_motor.run_forever(duty_cycle_sp = dc_clamp(-fwd_speed+turn_speed))
+            self.left1_motor.run_forever(duty_cycle_sp = dc_clamp(-fwd_speed-turn_speed))
+            self.left2_motor.run_forever(duty_cycle_sp = dc_clamp(fwd_speed+turn_speed))
+            self.right1_motor.run_forever(duty_cycle_sp = dc_clamp(fwd_speed-turn_speed))
+            self.right2_motor.run_forever(duty_cycle_sp = dc_clamp(-fwd_speed+turn_speed))
 
         self.front_motor.stop()
         self.back_motor.stop()
@@ -80,14 +80,11 @@ if __name__ == "__main__":
 
     for event in gamepad.read_loop(): #this loops infinitely
         if event.type == 3: #A stick is moved
-
-            if event.code == 2: #X axis on right stick
-                side_speed = scalestick(event.value)
-
-            if event.code == 5: #Y axis on right stick
+            
+            if event.code == 1: #Y axis on left stick
                 fwd_speed = scalestick(event.value)
 
-            if event.code == 0: #X axis on right stick
+            if event.code == 2: #X axis on right stick
                 turn_speed = -scalestick(event.value)
 
         if event.type == 1 and event.code == 302 and event.value == 1:

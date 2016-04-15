@@ -84,12 +84,12 @@ if __name__ == "__main__":
             
             if event.code == 1: #Y axis on left stick
                 fwd_speed = scalestick(event.value)
-                if abs(fwd_speed) < 10:
+                if abs(fwd_speed) < 10: #deadzone of +- 10
                     fwd_speed = 0
 
             if event.code == 2: #X axis on right stick
                 turn_speed = -scalestick(event.value)
-                if abs(turn_speed) < 10:
+                if abs(turn_speed) < 10: #deadzone of +- 10
                     turn_speed = 0
 
         if event.type == 1 and event.code == 302 and event.value == 1:

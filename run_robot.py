@@ -6,6 +6,8 @@ import ev3dev.auto as ev3
 import threading
 import time
 
+print "run_robot.py has started..."
+
 #Helpers
 def clamp(n, (minn, maxn)):
     """
@@ -62,8 +64,8 @@ class MotorThread(threading.Thread):
     def run(self):
         print "Engines running!"
         while running:
-            self.left1_motor.run_forever(duty_cycle_sp = dc_clamp(-fwd_speed-turn_speed))
-            self.left2_motor.run_forever(duty_cycle_sp = dc_clamp(fwd_speed+turn_speed))
+            self.left2_motor.run_forever(duty_cycle_sp = dc_clamp(-fwd_speed-turn_speed))
+            self.left1_motor.run_forever(duty_cycle_sp = dc_clamp(fwd_speed+turn_speed))
             self.right1_motor.run_forever(duty_cycle_sp = dc_clamp(fwd_speed-turn_speed))
             self.right2_motor.run_forever(duty_cycle_sp = dc_clamp(-fwd_speed+turn_speed))
 

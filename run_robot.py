@@ -67,10 +67,10 @@ class MotorThread(threading.Thread):
             self.right1_motor.run_forever(duty_cycle_sp = dc_clamp(fwd_speed-turn_speed))
             #self.right2_motor.run_forever(duty_cycle_sp = dc_clamp(fwd_speed-turn_speed))
 
-        self.front_motor.stop()
-        self.back_motor.stop()
-        self.left_motor.stop()
-        self.right_motor.stop()
+        #self.left2_motor.stop()
+        self.left1_motor.stop()
+        self.right1_motor.stop()
+        #self.right2_motor.stop()
 
 
 if __name__ == "__main__":

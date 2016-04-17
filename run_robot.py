@@ -47,8 +47,8 @@ gamepad = evdev.InputDevice(ps3dev)
 
 
 
-turn_speed = 0
-fwd_speed = 0
+left_speed = 0
+right_speed = 0
 running = True
 
 class MotorThread(threading.Thread):
@@ -63,8 +63,8 @@ class MotorThread(threading.Thread):
         print "Engines running!"
         while running:
             #self.left2_motor.run_forever(duty_cycle_sp = dc_clamp(fwd_speed+turn_speed))
-            self.left1_motor.run_forever(duty_cycle_sp = dc_clamp(fwd_speed+turn_speed))
-            self.right1_motor.run_forever(duty_cycle_sp = dc_clamp(fwd_speed-turn_speed))
+            self.left1_motor.run_forever(duty_cycle_sp = dc_clamp(left_speed))
+            self.right1_motor.run_forever(duty_cycle_sp = dc_clamp(right_speed))
             #self.right2_motor.run_forever(duty_cycle_sp = dc_clamp(fwd_speed-turn_speed))
 
         #self.left2_motor.stop()
@@ -82,18 +82,18 @@ if __name__ == "__main__":
         if event.type == 3: #A stick is moved
             
             if event.code == 1: #Y axis on left stick
-                fwd_speed = scalestick(event.value)
-                if abs(fwd_speed) < 15: #deadzone
-                    fwd_speed = 0
+                left_speed = scalestick(event.value)
+                if abs(left_speed) < 15: #deadzone
+                    left_speed = 0
 
             if event.code == 2: #X axis on right stick
-                turn_speed = -scalestick(event.value)
-                if abs(turn_speed) < 15: #deadzone
-                    turn_speed = 0
+                right_speed = scalestick(event.value)
+                if abs(right_speed) < 15: #deadzone
+                    right_speed = 0
 
         if event.type == 1 and event.code == 302 and event.value == 1:
             print "X button is pressed. Break."
             running = False
-            time.sleep(4) # Wait for the motor thread to finish
+            time.sleep(1) # Wait for the motor thread to finish
             break
 

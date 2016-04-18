@@ -53,24 +53,24 @@ running = True
 
 class MotorThread(threading.Thread):
     def __init__(self):
-        #self.left2_motor = ev3.LargeMotor(ev3.OUTPUT_A)
+        self.left2_motor = ev3.LargeMotor(ev3.OUTPUT_A)
         self.left1_motor = ev3.LargeMotor(ev3.OUTPUT_B)
         self.right1_motor = ev3.LargeMotor(ev3.OUTPUT_C)
-        #self.right2_motor = ev3.LargeMotor(ev3.OUTPUT_D)
+        self.right2_motor = ev3.LargeMotor(ev3.OUTPUT_D)
         threading.Thread.__init__(self)
 
     def run(self):
         print "Engines running!"
         while running:
-            #self.left2_motor.run_forever(duty_cycle_sp = dc_clamp(fwd_speed+turn_speed))
+            self.left2_motor.run_forever(duty_cycle_sp = dc_clamp(left_speed))
             self.left1_motor.run_forever(duty_cycle_sp = dc_clamp(left_speed))
             self.right1_motor.run_forever(duty_cycle_sp = dc_clamp(right_speed))
-            #self.right2_motor.run_forever(duty_cycle_sp = dc_clamp(fwd_speed-turn_speed))
+            self.right2_motor.run_forever(duty_cycle_sp = dc_clamp(right_speed))
 
-        #self.left2_motor.stop()
+        self.left2_motor.stop()
         self.left1_motor.stop()
         self.right1_motor.stop()
-        #self.right2_motor.stop()
+        self.right2_motor.stop()
 
 
 if __name__ == "__main__":

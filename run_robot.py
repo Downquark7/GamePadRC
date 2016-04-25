@@ -87,7 +87,7 @@ if __name__ == "__main__":
                 left_speed = scalestick(event.value)
                 if abs(left_speed) < 15: #deadzone
                     left_speed = 0
-'''
+            '''
             if event.code == 0: #X axis on left stick
                 lift_speed = scalestick(event.value)
                 if abs(lift_speed) < 15: #deadzone
@@ -97,7 +97,7 @@ if __name__ == "__main__":
                 other_speed = scalestick(event.value)
                 if abs(other_speed) < 15: #deadzone
                     other_speed = 0
-'''
+            '''
             if event.code == 5: #Y axis on right stick
                 right_speed = scalestick(event.value)
                 if abs(right_speed) < 15: #deadzone

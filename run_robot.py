@@ -6,11 +6,11 @@ import ev3dev.auto as ev3
 import threading
 import time
 
+
 #Helpers
 def clamp(n, (minn, maxn)):
     """
     Given a number and a range, return the number, or the extreme it is closest to.
-
     :param n: number
     :return: number
     """
@@ -20,22 +20,24 @@ def clamp(n, (minn, maxn)):
 def scale(val, src, dst):
     """
     Scale the given value from the scale of src to the scale of dst.
-
     val: float or int
     src: tuple
     dst: tuple
-
     example: print scale(99, (0.0, 99.0), (-1.0, +1.0))
     """
     return (float(val - src[0]) / (src[1] - src[0])) * (dst[1] - dst[0]) + dst[0]
 
 def scalestick(value):
-    return scale(value,(-1,1),(-100,100))
+    return scale(value,(0,255),(-100,100))
 
 def dc_clamp(value):
     return clamp(value,(-100,100))
 
-ps3dev = "/dev/input/js0"
+print "Finding ps3 controller..."
+devices = [evdev.InputDevice(fn) for fn in evdev.list_devices()]
+for device in devices:
+    if device.name == 'PLAYSTATION(R)3 Controller':
+        ps3dev = device.fn
 
 
 gamepad = evdev.InputDevice(ps3dev)
@@ -74,7 +76,7 @@ if __name__ == "__main__":
     motor_thread = MotorThread()
     motor_thread.setDaemon(True)
     motor_thread.start()
-    
+
     for event in gamepad.read_loop(): #this loops infinitely
         if event.type == 3: #A stick is moved
             
@@ -87,7 +89,6 @@ if __name__ == "__main__":
                 lift_speed = scalestick(event.value)
                 if abs(lift_speed) < 15: #deadzone
                     lift_speed = 0
-
             if event.code == 2: #X axis on right stick
                 other_speed = scalestick(event.value)
                 if abs(other_speed) < 15: #deadzone

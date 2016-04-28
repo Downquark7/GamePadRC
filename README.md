@@ -1,5 +1,5 @@
 # GamePadRC
-Remote control Lego Mindstorms Ev3 robot with A PS3 sixaxis dualoshock 3 gamepad
+Remote control Lego Mindstorms Ev3 robot with a USB gamepad 
 
 # Requirements
 LEGO Ev3 brick with ev3dev (http://www.ev3dev.org/)

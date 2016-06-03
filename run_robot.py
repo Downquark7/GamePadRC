@@ -91,7 +91,7 @@ if __name__ == "__main__":
                     lift_speed = 0
             '''
             if event.code == 2: #X axis on right stick
-                turn_speed = scalestick(event.value)
+                turn_speed = -scalestick(event.value)
                 if abs(turn_speed) < 15: #deadzone
                     turn_speed = 0
             '''

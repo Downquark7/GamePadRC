@@ -81,7 +81,7 @@ if __name__ == "__main__":
         if event.type == 3: #A stick is moved
             
             if event.code == 1: #Y axis on left stick
-                forward_speed = -scalestick(event.value)
+                forward_speed = scalestick(event.value)
                 if abs(forward_speed) < 15:
                     forward_speed = 0
             '''
@@ -91,7 +91,7 @@ if __name__ == "__main__":
                     lift_speed = 0
             '''
             if event.code == 2: #X axis on right stick
-                turn_speed = -scalestick(event.value)
+                turn_speed = scalestick(event.value)
                 if abs(turn_speed) < 15: #deadzone
                     turn_speed = 0
             '''

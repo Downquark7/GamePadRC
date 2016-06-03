@@ -82,7 +82,7 @@ if __name__ == "__main__":
             
             if event.code == 1: #Y axis on left stick
                 forward_speed = -scalestick(event.value)
-                if abs(forward_speed- < 15:
+                if abs(forward_speed) < 15:
                     forward_speed = 0
             '''
             if event.code == 0: #X axis on left stick
